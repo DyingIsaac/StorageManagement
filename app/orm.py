@@ -184,6 +184,12 @@ class IntegerField(Field):
         super().__init__(column_name, column_type, primary_key, default)
 
 
+class BooleanFiled(Field):
+
+    def __init__(self, column_name, default=None):
+        super().__init__(column_name, 'BOOLEAN', False, default)
+
+
 class DateField(Field):
 
     def __init__(self, column_name, primary_key=False, default=None):

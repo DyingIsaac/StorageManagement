@@ -1,4 +1,4 @@
-from app.orm import Model, StringField, IntegerField, FloatField, TextField, DateField, PasswordField, TimestampField
+from app.orm import Model, StringField, IntegerField, FloatField, TextField, DateField, PasswordField, TimestampField, BooleanFiled
 from datetime import date
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -159,8 +159,9 @@ class Employee(Model, UserMixin):
     pw = PasswordField(column_name='pw')
     addr = StringField(column_name='addr', column_type=VARCHAR30)
     birthday = DateField(column_name='birthday')
+    isSU = BooleanFiled(column_name='isSU')
 
-    def __init__(self, name, sex, email, nickname, pw, addr, birthday, eid=None):
+    def __init__(self, name, sex, email, nickname, addr, birthday, eid=None, pw=None, isSU=None):
         super().__init__()
         self.eid = eid
         self.name = name
@@ -169,6 +170,7 @@ class Employee(Model, UserMixin):
         self.nickname = nickname
         self.pw = pw
         self.addr = addr
+        self.isSU = isSU
         self.birthday = birthday
         self.age = calculate_age(birthday)
 
