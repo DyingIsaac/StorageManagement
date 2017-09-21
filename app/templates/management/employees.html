@@ -1,0 +1,60 @@
+{% extends "management/index.html" %}
+
+{% import "macros.html" as macros %}
+
+{% block true_content %}
+<div class="row">
+    <h1 align="center">员工信息</h1>
+</div>
+<div style="padding: 5px;">
+    <form class="bs-example bs-example-form" role="form">
+        <div class="row" style="margin-bottom: 5px">
+            {{ macros.render_filter('编号', 'eid', filters.eid) }}
+            {{ macros.render_filter('姓名', 'name', filters.name)}}
+            {{ macros.render_filter('性别', 'sex', filters.sex)}}
+        </div>
+        <div class="row" style="margin-bottom: 5px">
+            {{ macros.render_filter('邮箱', 'email', filters.email)}}
+            {{ macros.render_filter('地址', 'addr', filters.addr)}}
+            {{ macros.render_filter('年龄', 'age', filters.age)}}
+        </div>
+        <div class="row">
+            {{ macros.render_filter('生日', 'birthday', filters.birthday)}}
+            <div class="col-md-4 col-sm-4 col-md-push-4 col-sm-push-4" align="right">
+                <button class="btn btn-primary">
+                    检索
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<table class="table table-striped table-bordered" id="employ_table">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>邮箱</th>
+            <th>地址</th>
+            <th>年龄</th>
+            <th>生日</th>
+        </tr>
+    </thead>
+{% if employees %}
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.eid }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.sex }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.addr }}</td>
+            <td>{{ employee.age }}</td>
+            <td>{{ employee.birthday }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+{% endif %}
+</table>
+{% endblock %}

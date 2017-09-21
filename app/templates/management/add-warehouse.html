@@ -1,0 +1,18 @@
+{% extends "management/index.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block true_content %}
+<div align="center">
+    <h1>添加仓库</h1>
+</div>
+{{wtf.quick_form(form)}}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    $(document).ready(function(){
+        $("#submit").removeClass("btn-default").addClass("btn-block btn-primary");
+    });
+</script>
+{% endblock %}

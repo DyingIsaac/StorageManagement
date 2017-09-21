@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<div class="page-header" align="center">
+    <h1>{{ user_type }}登录</h1>
+</div>
+<div class="col-md-4 col-md-push-4 col-sm-6 col-sm-push-3">
+    {{ wtf.quick_form(form) }}
+    {% if user_type == '用户' %}
+    <a href="{{ url_for('auth.register') }}" style="margin: 10px">
+        <button class="btn btn-block btn-danger">注册</button>
+    </a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    $(document).ready(function(){
+        $("#submit").removeClass("btn-default").addClass("btn-block btn-primary");
+    });
+</script>
+{% endblock %}

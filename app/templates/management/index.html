@@ -1,0 +1,205 @@
+{% extends "./base.html" %}
+
+{% block styles %}
+{{ super() }}
+<style type="text/css">
+.sidebar {
+    width: 130;
+}
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-top-color: #bdbdbd;
+}
+.panel-default>.panel-heading {
+    color: #D1D1D1;
+    background-color: #3a3a3a;
+    border-color: #858585;
+}
+.panel-body {
+    padding:10px;
+    padding-left: 15px;
+    background-color: #E0E0E0;
+}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 col-sm-2">
+            <aside class="sidebar show perfectScrollbar">
+                <div id="solso-sidebar">
+                    <div class="panel-group" id="accordion">
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseOne">
+                                员工管理
+                            </button>
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="{{ url_for('manage.employees') }}">员工信息</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="{{ url_for('manage.add_employee') }}">添加员工</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseTwo">
+                                客户管理
+                            </button>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="{{ url_for('manage.clients') }}">客户信息</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseThree">
+                                仓库管理
+                            </button>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="{{ url_for('manage.warehouses') }}">仓库信息</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="{{ url_for('manage.add_warehouse') }}">添加仓库</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseFour">
+                                订单管理
+                            </button>
+                            <div id="collapseFour" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="#">所有订单</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseFive">
+                                报损管理
+                            </button>
+                            <div id="collapseFive" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="#">提交报损单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">查看报损单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">审核报损单</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseSix">
+                                采购管理
+                            </button>
+                            <div id="collapseSix" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="#">提交采购单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">查看采购单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">审核采购单</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseSeven">
+                                调度管理
+                            </button>
+                            <div id="collapseSeven" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="#">提交调度单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">查看调度单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">审核调度单</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseEight">
+                                入库管理
+                            </button>
+                            <div id="collapseEight" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="#">提交入库单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">查看入库单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">审核入库单</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseNine">
+                                出库管理
+                            </button>
+                            <div id="collapseNine" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="#">提交出库单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">查看出库单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">审核出库单</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseTen">
+                                账号管理
+                            </button>
+                            <div id="collapseTen" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a href="#">账号信息</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a href="#">修改密码</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="col-md-8 col-sm-10">
+            <div class="container-fluid left-border">
+                {% block true_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3" data-spy="affix" data-offset-top="200" data-offset-left="100">
+        </div>
+    </div>
+</div>
+{% endblock %}
