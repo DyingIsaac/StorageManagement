@@ -1,21 +1,58 @@
-from flask import render_template, request, flash, redirect, url_for
-from ..decorators import employee_reauired
+from flask import render_template, request, flash, redirect, url_for, abort
+from ..decorators import employee_required
 from .forms import AddEmployeeForm, AddWarehouseForm
 from datetime import date
-from ..models import Employee, Client, Warehouse
+from ..models import Employee, Client, Warehouse, Order, OrderDetail, Good
 from ..orm import and_, or_
 
 from . import manage
 
 
+def _check_id(idname, query, filters):
+    myid = request.args.get(idname, None)
+    if myid:
+        try:
+            myid = int(myid)
+            query.append('{}={}'.format(idname, myid))
+            filters[idname] = myid
+        except ValueError:
+            flash('编号必须为数字')
+
+
+def _datefstr(timestr):
+    if timestr and len(timestr)==10 :
+        try:
+            year = int(timestr[:4])
+            month = int(timestr[5:7])
+            day = int(timestr[8:])
+            year, month, day = map(int, timestr.split('-'))
+        except ValueError:
+            flash('日期中只能含有数字')
+            return None
+        try:
+            d = date(year, month, day)
+        except ValueError:
+            flash('日期不合法')
+            return None
+        if d > date.today():
+            flash('日期大于今天')
+            return None
+        return d
+    return None
+
+
+
+
+
+
 @manage.route('/employees/<nickname>/')
-@employee_reauired
+@employee_required
 def index(nickname):
     return render_template("management/index.html", page_title='管理', nickname=nickname)
 
 
 @manage.route('/add-employee/', methods=['GET', 'POST'])
-@employee_reauired
+@employee_required
 def add_employee():
     form = AddEmployeeForm()
     if form.validate_on_submit():
@@ -29,18 +66,11 @@ def add_employee():
 
 
 @manage.route('/employees/')
-@employee_reauired
+@employee_required
 def employees():
     query = []
     filters = dict()
-    eid = request.args.get('eid', None)
-    if eid:
-        try:
-            eid = int(eid)
-            query.append('eid={}'.format(int(eid)))
-            filters['eid'] = eid
-        except ValueError:
-            flash('编号必须为数字')
+    _check_id('eid', query, filters)
     name = request.args.get('name', None)
     if name:
         query.append('name="{}"'.format(name))
@@ -83,18 +113,11 @@ def employees():
 
 
 @manage.route('/clients/')
-@employee_reauired
+@employee_required
 def clients():
     query = []
     filters = dict()
-    cid = request.args.get('cid', None)
-    if cid:
-        try:
-            cid = int(cid)
-            query.append('cid={}'.format(int(cid)))
-            filters['cid'] = cid
-        except ValueError:
-            flash('编号必须为数字')
+    _check_id('cid', query, filters)
     name = request.args.get('name', None)
     if name:
         query.append('name="{}"'.format(name))
@@ -115,18 +138,11 @@ def clients():
 
 
 @manage.route('/warehouses/')
-@employee_reauired
+@employee_required
 def warehouses():
     query = []
     filters = dict()
-    wid = request.args.get('wid', None)
-    if wid:
-        try:
-            wid = int(wid)
-            query.append('wid={}'.format(int(wid)))
-            filters['wid'] = wid
-        except ValueError:
-            flash('编号必须为数字')
+    _check_id('wid', query, filters)
     name = request.args.get('name', None)
     if name:
         query.append('name="{}"'.format(name))
@@ -143,7 +159,7 @@ def warehouses():
 
 
 @manage.route('/add-warehouse/', methods=['GET', 'POST'])
-@employee_reauired
+@employee_required
 def add_warehouse():
     form = AddWarehouseForm()
     if form.validate_on_submit():
@@ -152,6 +168,36 @@ def add_warehouse():
         return redirect(url_for('manage.add_employee'))
     return render_template('management/add-warehouse.html', page_title='添加仓库', form=form)
 
+
+@manage.route('/orders/')
+@employee_required
+def orders():
+    query = []
+    filters = dict()
+    _check_id('oid', query, filters)
+    _check_id('cid', query, filters)
+    min_date = _datefstr(request.args.get('min_date'))
+    if min_date:
+        query.append('time>={}'.format(min_date))
+        filters['min_date'] = min_date
+    max_date = _datefstr(request.args.get('max_date'))
+    if max_date:
+        query.append('time<={}'.format(max_date))
+        filters['max_date'] = max_date
+    state = request.args.get('state')
+    if state:
+        query.append('state={}'.format(state))
+        filters['state'] = state
+    q = Order.query
+    if len(query) > 0:
+        q = q.filter_by(*query)
+    results = q.all()
+    if results:
+        for order in results:
+            order.details = OrderDetail.query.filter_by('oid={}'.format(order.oid), 'cid={}'.format(order.cid)).all()
+            for detail in order.details:
+                detail.good_name = Good.query.filter_by('gid={}'.format(detail.gid))
+    return render_template('management/orders.html', page_title='订单信息', orders=results, filters=filters)
 
 
 

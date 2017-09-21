@@ -9,9 +9,9 @@
 <div style="padding: 5px;">
     <form class="bs-example bs-example-form" role="form">
         <div class="row" style="margin-bottom: 5px">
-            {{ macros.render_filter('编号', 'wid', filters.wid) }}
-            {{ macros.render_filter('名称', 'name', filters.name)}}
-            {{ macros.render_filter('地址', 'addr', filters.addr)}}
+            {{ macros.render_filter('编号', 'wid', filters) }}
+            {{ macros.render_filter('名称', 'name', filters)}}
+            {{ macros.render_filter('地址', 'addr', filters)}}
         </div>
         <div class="row" style="margin-bottom: 5px">
             <div class="col-md-4 col-sm-4 col-md-push-4 col-sm-push-8" align="right">

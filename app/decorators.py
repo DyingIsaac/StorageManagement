@@ -20,5 +20,15 @@ def client_required(f):
     return permission_required(Client)(f)
 
 
-def employee_reauired(f):
+def employee_required(f):
     return permission_required(Employee)(f)
+
+
+@employee_required
+def su_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.isSU:
+            abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
