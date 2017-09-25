@@ -125,7 +125,7 @@ class Type(Model):
     name = StringField(column_name='name', column_type=VARCHAR30)
     parent = IntegerField(column_name='parent', column_type=MEDIUMINT)
 
-    def __init__(self, name, parent, tid=None):
+    def __init__(self, name, tid=None, parent=None):
         super().__init__()
         self.tid = tid
         self.name = name
@@ -404,8 +404,9 @@ class Purchase(Model):
     checker = IntegerField(column_name='checker')
     wid = IntegerField(column_name='wid', column_type=MEDIUMINT)
     time = TimestampField(column_name='time')
+    state = StringField(column_name='state', column_type=VARCHAR10)
 
-    def __init__(self, pid, eid, checker, wid, time, purchase_id=None):
+    def __init__(self, pid, eid, checker, wid, time, purchase_id=None, state='未审核'):
         super().__init__()
         self.purchase_id = purchase_id
         self.pid = pid
@@ -413,6 +414,7 @@ class Purchase(Model):
         self.checker = checker
         self.wid = wid
         self.time = time
+        self.state = state
 
 
 class PurchaseDetail(Model):
@@ -420,14 +422,16 @@ class PurchaseDetail(Model):
 
     purchase_id = IntegerField(column_name='purchase_id', column_type=MEDIUMINT, primary_key=True)
     gid = IntegerField(column_name='gid', column_type=MEDIUMINT, primary_key=True)
+    count = IntegerField(column_name='count')
     price = FloatField(column_name='price')
     state = StringField(column_name='state', column_type=VARCHAR10)
 
-    def __init__(self, purchase_id, gid, price, state):
+    def __init__(self, purchase_id, gid, price, count, state):
         super().__init__()
         self.purchase_id = purchase_id
         self.gid = gid
         self.price = price
+        self.count = count
         self.state = state
 
 

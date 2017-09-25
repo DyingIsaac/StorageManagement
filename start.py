@@ -1,5 +1,5 @@
 from app import create_app
-from app.models import Employee
+from app.models import Employee, Provider, Good, Type, Warehouse
 
 app = create_app()
 
@@ -10,3 +10,4 @@ if __name__ == '__main__':
         e.insert_db()
 
     app.run(debug=True)
+

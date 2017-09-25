@@ -48,3 +48,10 @@ class AddWarehouseForm(FlaskForm):
     addr = StringField('地址', validators=[InputRequired(), Length(1, 30)])
 
     submit = SubmitField('确认添加')
+
+
+class ModifyPasswordForm(FlaskForm):
+    password = PasswordField('新密码', validators=[InputRequired(), EqualTo('password2', '密码不匹配')])
+    password2 = PasswordField('确认密码', validators=[InputRequired()])
+
+    submit = SubmitField('确认修改')

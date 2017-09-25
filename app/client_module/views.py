@@ -6,7 +6,7 @@ from . import client
 
 
 @client.route('/<nickname>/')
-@login_required
 @client_required
 def index(nickname):
     return render_template('user.html', nickname=nickname)
+

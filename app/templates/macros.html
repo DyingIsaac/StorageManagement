@@ -1,8 +1,8 @@
-{% macro render_filter(addon_name, name, filters) %}
+{% macro render_filter(type, addon_name, name, filters, extra='') %}
 <div class="col-md-4 col-sm-4">
     <div class="input-group">
         <span class="input-group-addon">{{addon_name}}</span>
-        <input type="text" class="form-control" name="{{name}}" value={{filters[name]}}>
+        <input type="{{type}}" class="form-control" name="{{name}}" {{extra}} value={{filters[name]}}>
     </div>
 </div>
 {% endmacro %}

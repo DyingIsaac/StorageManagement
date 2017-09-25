@@ -206,6 +206,7 @@ CREATE TABLE Purchase(
     eid MEDIUMINT NOT NULL,
     checker MEDIUMINT,
     wid MEDIUMINT NOT NULL,
+    state VARCHAR(10) NOT NULL,
     time TIMESTAMP NOT NULL,
     PRIMARY KEY (purchase_id),
     FOREIGN KEY (pid) REFERENCES Providers(pid),
@@ -217,6 +218,7 @@ CREATE TABLE Purchase(
 CREATE TABLE PurchaseDetail(
     purchase_id MEDIUMINT NOT NULL,
     gid MEDIUMINT NOT NULL,
+    count FLOAT NOT NULL,
     price FLOAT NOT NULL,
     state VARCHAR(10) NOT NULL,
     PRIMARY KEY (purchase_id, gid),

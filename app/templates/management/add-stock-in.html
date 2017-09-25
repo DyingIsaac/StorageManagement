@@ -1,0 +1,103 @@
+
+{% extends "management/index.html" %}
+
+{% block true_content %}
+<div class="row">
+    <h1 align="center">提交购货单</h1>
+</div>
+<form method="POST">
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-4 col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon">仓库</span>
+                <select class="form-control candisabled" id="wid-selector" name="wid" required>
+                    {% for warehouse in warehouses %}
+                    {% if loop.first %}
+                    <option value="{{warehouse.wid}}" selected>{{warehouse.wid}}: {{warehouse.name}}</option>
+                    {% else %}
+                    <option value="{{warehouse.wid}}">{{warehouse.wid}}: {{warehouse.name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon">货物</span>
+                <select class="form-control candisabled" id="gid-selector" name="gid" required>
+                    {% for good in goods %}
+                    {% if loop.first %}
+                    <option value="{{good.gid}}" selected>{{good.gid}}: {{good.name}}</option>
+                    {% else %}
+                    <option value="{{good.gid}}">{{good.gid}}: {{good.name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon">数量</span>
+                <input type="number" class="form-control candisabled" name="count" required>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-4 col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon">入库原因</span>
+                <input type="text" class="form-control candisabled" name="reason" required>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="input-group">
+                <span class="input-group-addon">关联单号</span>
+                <input type="number" class="form-control candisabled" name="extra">
+            </div>
+        </div>
+    </div>
+    <input id="submit" type="submit" name="submit" value="submit" style="display: none;">
+</form>
+<div class="row input-row">
+    <div class="col-md-12 col-sm-12">
+        <button class="btn btn-primary btn-block" onclick="check_purchase()">确认</button>
+    </div>
+</div>
+<div class="row confirm-row" style="display: none;">
+    <div class="col-md-12 col-sm-12">
+        <button class="btn btn-success btn-block" onclick="submit_purchase()">提交</input>
+        <button class="btn btn-danger btn-block" onclick="cancle_confirmation()">取消</button>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<script>
+    function disable_inputs() {
+        $(".candisabled").attr("disabled", "disabled");
+    }
+
+    function enable_inputs() {
+        $(".candisabled").removeAttr("disabled");
+    }
+
+    function check_purchase() {
+        disable_inputs();
+        $(".input-row").hide();
+        $(".confirm-row").show();
+    }
+
+    function cancle_confirmation() {
+        enable_inputs();
+        $(".input-row").show();
+        $(".confirm-row").hide();
+    }
+
+    function submit_purchase() {
+        cancle_confirmation();
+        $("#submit").click();
+    }
+</script>
+{% endblock %}

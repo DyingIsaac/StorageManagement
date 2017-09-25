@@ -1,0 +1,108 @@
+{% extends "management/index.html" %}
+
+{% block true_content %}
+<div class="row">
+    <h1 align="center">账户信息</h1>
+</div>
+
+<form method="POST">
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+            <div class="input-group">
+                <span class="input-group-addon">员工编号</span>
+                <input type="number" class="form-control disabled" name="eid" disabled value={{e.eid}}>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+            <div class="input-group">
+                <span class="input-group-addon">姓名</span>
+                <input type="text" class="form-control disabled" name="name" disabled value="{{e.name}}">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+            <div class="input-group">
+                <span class="input-group-addon">昵称</span>
+                <input type="text" class="form-control disabled canmodify" name="nickname" disabled required value="{{e.nickname}}">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+            <div class="input-group">
+                <span class="input-group-addon">性别</span>
+                <input type="text" class="form-control disabled" name="sex" disabled value="{{e.sex}}">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+            <div class="input-group">
+                <span class="input-group-addon">邮箱</span>
+                <input type="email" class="form-control disabled" name="email" disabled value="{{e.email}}">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+            <div class="input-group">
+                <span class="input-group-addon">地址</span>
+                <input type="text" class="form-control disabled canmodify" name="addr" disabled required value="{{e.addr}}">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 5px;">
+        <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+            <div class="input-group">
+                <span class="input-group-addon">生日</span>
+                <input type="date" class="form-control disabled" name="birthday" disabled required value="e.birthday">
+            </div>
+        </div>
+    </div>
+    <input id="submit" type="submit" name="submit" value="submit" style="display: none;">
+</form>
+<div class="row input-row">
+    <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+        <button class="btn btn-danger btn-block" onclick="modify_account()">修改信息</button>
+    </div>
+</div>
+<div class="row confirm-row" style="display: none;">
+    <div class="col-md-8 col-sm-8 col-md-push-2 col-sm-push-2">
+        <button class="btn btn-success btn-block" onclick="submit_purchase()">提交</input>
+        <button class="btn btn-danger btn-block" onclick="cancle_confirmation()">取消</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    function disable_inputs() {
+        $(".canmodify").attr("disabled", "disabled");
+    }
+
+    function enable_inputs() {
+        $(".canmodify").removeAttr("disabled");
+    }
+
+    function modify_account() {
+        enable_inputs();
+        $(".input-row").hide();
+        $(".confirm-row").show();
+    }
+
+    function cancle_confirmation() {
+        disable_inputs();
+        $(".input-row").show();
+        $(".confirm-row").hide();
+    }
+
+    function submit_purchase() {
+        cancle_confirmation();
+        $("#submit").click();
+    }
+</script>
+{% endblock %}

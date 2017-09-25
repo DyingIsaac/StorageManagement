@@ -1,0 +1,120 @@
+{% extends "management/index.html" %}
+
+{% macro gen_detail_row() %}
+<tr class="detail-row">
+    <td>
+        <select class="form-control purchase good-selector" name="gid" required>
+            {% for good in goods %}
+            {% if loop.first %}
+            <option value="{{good.gid}}" class="good-option" selected>{{good.name}}</option>
+            {% else %}
+            <option value="{{good.gid}}" class="good-option" } >{{good.name}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </td>
+    <td>
+        <input type="number" class="form-control purchase" min=1 name="count" required="required">
+    </td>
+</tr>
+{% endmacro %}
+
+{% block true_content %}
+<div class="row">
+    <h1 align="center">提交购货单</h1>
+</div>
+<form method="POST">
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+                <span class="input-group-addon">供货商编号</span>
+                <select class="form-control" id="pid-selector" name="pid" required>
+                    {% for provider in providers %}
+                    {% if loop.first %}
+                    <option value="{{provider.pid}}" selected>{{provider.pid}}: {{provider.name}}</option>
+                    {% else %}
+                    <option value="{{provider.pid}}">{{provider.pid}}: {{provider.name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="input-group">
+                <span class="input-group-addon">仓库编号</span>
+                <select class="form-control" id="wid-selector" name="wid" required>
+                    {% for warehouse in warehouses %}
+                    {% if loop.first %}
+                    <option value="{{warehouse.wid}}" selected>{{warehouse.wid}}: {{warehouse.name}}</option>
+                    {% else %}
+                    <option value="{{warehouse.wid}}">{{warehouse.wid}}: {{warehouse.name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>
+                <!-- <input type="number" name="wid" class="form-control purchase" min=1 required="required"> -->
+            </div>
+        </div>
+    </div>
+    <table class="table table-stried">
+        <thead>
+            <tr>
+                <th>货品</th>
+                <th>数量</th>
+            </tr>
+        </thead>
+        <tbody class="details-body">
+            {{ gen_detail_row() }}
+        </tbody>
+    </table>
+    <input id="submit" type="submit" name="submit" value="submit" style="display: none;">
+</form>
+<div class="row input-row">
+    <div class="col-md-12 col-sm-12">
+        <button class="btn btn-default btn-block" onclick="append_detail()"><span class="glyphicon glyphicon-plus"></span></button>
+        <button class="btn btn-primary btn-block" onclick="check_purchase()">确认</button>
+    </div>
+</div>
+<div class="row confirm-row" style="display: none;">
+    <div class="col-md-12 col-sm-12">
+        <button class="btn btn-success btn-block" onclick="submit_purchase()">提交</input>
+        <button class="btn btn-danger btn-block" onclick="cancle_confirmation()">取消</button>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<script>
+    function append_detail() {
+        $(".details-body:last").append(
+           `{{ gen_detail_row() }}`
+        );
+    }
+
+    function disable_inputs() {
+        $(".purchase").attr("disabled", "disabled");
+    }
+
+    function enable_inputs() {
+        $(".purchase").removeAttr("disabled");
+    }
+
+    function check_purchase() {
+        disable_inputs();
+        $(".input-row").hide();
+        $(".confirm-row").show();
+    }
+
+    function cancle_confirmation() {
+        enable_inputs();
+        $(".input-row").show();
+        $(".confirm-row").hide();
+    }
+
+    function submit_purchase() {
+        cancle_confirmation();
+        $("#submit").click();
+    }
+</script>
+{% endblock %}

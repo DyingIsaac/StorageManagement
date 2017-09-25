@@ -9,17 +9,17 @@
 <div style="padding: 5px;">
     <form class="bs-example bs-example-form" role="form">
         <div class="row" style="margin-bottom: 5px">
-            {{ macros.render_filter('编号', 'eid', filters)}}
-            {{ macros.render_filter('姓名', 'name', filters)}}
-            {{ macros.render_filter('性别', 'sex', filters)}}
+            {{ macros.render_filter('number', '编号', 'eid', filters, 'min=1')}}
+            {{ macros.render_filter('text', '姓名', 'name', filters)}}
+            {{ macros.render_filter('text', '性别', 'sex', filters)}}
         </div>
         <div class="row" style="margin-bottom: 5px">
-            {{ macros.render_filter('邮箱', 'email', filters)}}
-            {{ macros.render_filter('地址', 'addr', filters)}}
-            {{ macros.render_filter('年龄', 'age', filters)}}
+            {{ macros.render_filter('email', '邮箱', 'email', filters)}}
+            {{ macros.render_filter('text', '地址', 'addr', filters)}}
+            {{ macros.render_filter('number', '年龄', 'age', filters, 'min=1')}}
         </div>
         <div class="row">
-            {{ macros.render_filter('生日', 'birthday', filters)}}
+            {{ macros.render_filter('date', '生日', 'birthday', filters)}}
             <div class="col-md-4 col-sm-4 col-md-push-4 col-sm-push-4" align="right">
                 <button class="btn btn-primary">
                     检索

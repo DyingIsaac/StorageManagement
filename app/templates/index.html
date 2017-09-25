@@ -5,8 +5,21 @@
 {% block page_content %}
 <div align="center" style="height: 100%; width: 100%; margin-top: 10%;">
     <div class="row" align="center" style="height: 50%;">
-        <h1>欢迎使用StoMa仓库管理系统</h1>
+        <h1>欢迎使用StoMa仓库管理系统 {% if current_user.is_authenticated %}, {{current_user.nickname}}{%endif%}</h1>
     </div>
+    {% if current_user.is_authenticated %}
+    <div class="row" align="center" style="height: 50%;">
+        <h2>现在你可以管理系统</h2>
+    </div>
+    <div align="center" style="height: 10%; margin: 50px">
+        <div style="width: 50%;">
+            <a href="{{url_for('manage.index', nickname=current_user.nickname)}}" style="margin: 40px;">
+                <button class="btn btn-default btn-lg">进入管理界面</button>
+            </a>
+        </div>
+    </div>
+
+    {% else %}
     <div align="center" style="height: 10%; margin: 50px">
         <div style="width: 50%;">
             <a href="{{url_for('auth.login', user_type='client-')}}" style="margin: 40px;">
@@ -17,5 +30,6 @@
             </a>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

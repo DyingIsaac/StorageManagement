@@ -15,8 +15,7 @@
     border-color: #858585;
 }
 .panel-body {
-    padding:10px;
-    padding-left: 15px;
+    padding: 5px;
     background-color: #E0E0E0;
 }
 </style>
@@ -35,11 +34,11 @@
                                 员工管理
                             </button>
                             <div id="collapseOne" class="panel-collapse collapse">
-                                <div class="panel-body" align="center">
-                                    <a href="{{ url_for('manage.employees') }}">员工信息</a>
+                                <div class="panel-body">
+                                    <a class="btn btn-block" href="{{ url_for('manage.employees') }}">员工信息</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="{{ url_for('manage.add_employee') }}">添加员工</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.add_employee') }}">添加员工</a>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +49,7 @@
                             </button>
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="{{ url_for('manage.clients') }}">客户信息</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.clients') }}">客户信息</a>
                                 </div>
                             </div>
                         </div>
@@ -61,10 +60,10 @@
                             </button>
                             <div id="collapseThree" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="{{ url_for('manage.warehouses') }}">仓库信息</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.warehouses') }}">仓库信息</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="{{ url_for('manage.add_warehouse') }}">添加仓库</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.add_warehouse') }}">添加仓库</a>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +74,7 @@
                             </button>
                             <div id="collapseFour" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="{{ url_for('manage.orders') }}">所有订单</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.orders') }}">所有订单</a>
                                 </div>
                             </div>
                         </div>
@@ -86,13 +85,13 @@
                             </button>
                             <div id="collapseFive" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="#">提交报损单</a>
+                                    <a class="btn btn-block" href="#">提交报损单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="#">查看报损单</a>
+                                    <a class="btn btn-block" href="#">查看报损单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="#">审核报损单</a>
+                                    <a class="btn btn-block" href="#">审核报损单</a>
                                 </div>
                                 
                             </div>
@@ -104,14 +103,14 @@
                             </button>
                             <div id="collapseSix" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="#">提交采购单</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.add_purchase') }}">提交采购单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="#">查看采购单</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.purchases') }}">查看采购单</a>
                                 </div>
-                                <div class="panel-body" align="center">
-                                    <a href="#">审核采购单</a>
-                                </div>
+                                <!-- <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="#"></a>审核采购单</a>
+                                </div> -->
                             </div>
                         </div>
 
@@ -121,13 +120,13 @@
                             </button>
                             <div id="collapseSeven" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="#">提交调度单</a>
+                                    <a class="btn btn-block" href="#">提交调度单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="#">查看调度单</a>
+                                    <a class="btn btn-block" href="#">查看调度单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="#">审核调度单</a>
+                                    <a class="btn btn-block" href="#">审核调度单</a>
                                 </div>
                             </div>
                         </div> -->
@@ -138,14 +137,14 @@
                             </button>
                             <div id="collapseEight" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="#">提交入库单</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.add_stock_in') }}">提交入库单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="#">查看入库单</a>
+                                    <a class="btn btn-block" href="#">查看入库单</a>
                                 </div>
-                                <div class="panel-body" align="center">
-                                    <a href="#">审核入库单</a>
-                                </div>
+                                <!-- <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="#">审核入库单</a>
+                                </div> -->
                             </div>
                         </div>
 
@@ -155,14 +154,14 @@
                             </button>
                             <div id="collapseNine" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="#">提交出库单</a>
+                                    <a class="btn btn-block" href="#">提交出库单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="#">查看出库单</a>
+                                    <a class="btn btn-block" href="#">查看出库单</a>
                                 </div>
-                                <div class="panel-body" align="center">
-                                    <a href="#">审核出库单</a>
-                                </div>
+                                <!-- <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="#">审核出库单</a>
+                                </div> -->
                             </div>
                         </div>
 
@@ -172,10 +171,10 @@
                             </button>
                             <div id="collapseTen" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a href="#">账号信息</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.account') }}">账号信息</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a href="#">修改密码</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.modify_password') }}">修改密码</a>
                                 </div>
                             </div>
                         </div>
@@ -186,12 +185,13 @@
         <div class="col-md-8 col-sm-10">
             <div class="container-fluid left-border">
                 {% block true_content %}
+                <div align="center">
+                    <h2>欢迎使用管理系统, {{current_user.nickname}}</h2>
+                </div>
                 {% endblock %}
             </div>
         </div>
     </div>
-
-
 </div>
 
 
