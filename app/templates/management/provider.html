@@ -1,0 +1,41 @@
+{% extends "management/index.html" %}
+
+{% block true_content %}
+<div align="center">
+    <h1>供应商详情 - {{ provider.pid }}</h1>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-3 col-md-push-1 col-sm-push-1" align="center">
+        <h4><b>名称：</b>{{ provider.name }}</h4>
+    </div>
+    <div class="col-md-3 col-sm-3 col-md-push-4 col-sm-push-4" align="center">
+        <h4><b>地址：</b>{{ provider.addr }}</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>货物编号</th>
+                    <th>货物名称</th>
+                    <th>货物类别</th>
+                    <th>单价</th>
+                </tr>
+            </thead>
+            {% if goods %}
+            <tbody>
+                {% for good in goods %}
+                <tr>
+                    <td>{{ good.gid }}</td>
+                    <td>{{ good.name }}</td>
+                    <td>{{ good.tid }}</td>
+                    <td>{{ good.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
+</div>
+{% endblock %}

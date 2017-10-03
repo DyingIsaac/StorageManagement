@@ -99,7 +99,7 @@ class ModelMetaclass(type):
                                                                            ','.join('?'*(len(primary_key)+len(fields))))
         attrs['__update__'] = 'UPDATE {} SET {} WHERE {}'.format(table_name,
                                                                  ','.join(['{}=?'.format(f) for f in fields]),
-                                                                 ','.join(['{}=?'.format(k) for k in primary_key]))
+                                                                 ' AND '.join(['{}=?'.format(k) for k in primary_key]))
         attrs['__delete__'] = 'DELETE FROM {} WHERE {}'.format(table_name,
                                                                ' AND '.join(['{}=?'.format(k) for k in primary_key]))
         cls = type.__new__(mcs, name, bases, attrs)

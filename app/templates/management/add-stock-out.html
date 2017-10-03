@@ -1,9 +1,8 @@
-
 {% extends "management/index.html" %}
 
 {% block true_content %}
 <div class="row">
-    <h1 align="center">提交入库单</h1>
+    <h1 align="center">提交出库单</h1>
 </div>
 <form method="POST">
     <div class="row" style="margin-bottom: 5px;">
@@ -45,7 +44,7 @@
     <div class="row" style="margin-bottom: 5px;">
         <div class="col-md-4 col-sm-4">
             <div class="input-group">
-                <span class="input-group-addon">入库原因</span>
+                <span class="input-group-addon">出库原因</span>
                 <input type="text" class="form-control candisabled" name="reason" required>
             </div>
         </div>
@@ -101,3 +100,4 @@
     }
 </script>
 {% endblock %}
+

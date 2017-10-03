@@ -1,0 +1,49 @@
+{% extends "management/index.html" %}
+
+{% block true_content %}
+<div align="center">
+    <h1>仓库详情 - {{ warehouse.wid }}</h1>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-3 col-md-push-1 col-sm-push-1" align="center">
+        <h4><b>名称：</b>{{ warehouse.name }}</h4>
+    </div>
+    <div class="col-md-3 col-sm-3 col-md-push-4 col-sm-push-4" align="center">
+        <h4><b>地址：</b>{{ warehouse.addr }}</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>货物编号</th>
+                    <th>货物名称</th>
+                    <th>货物类别</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>下限</th>
+                    <th>上限</th>
+                    <th>总价</th>
+                </tr>
+            </thead>
+            {% if stores %}
+            <tbody>
+                {% for store in stores %}
+                <tr>
+                    <td>{{ store.gid }}</td>
+                    <td>{{ store.good.name }}</td>
+                    <td>{{ store.good.tid }}</td>
+                    <td>{{ store.good.price }}</td>
+                    <td>{{ store.count }}</td>
+                    <td>{{ store.min }}</td>
+                    <td>{{ store.max }}</td>
+                    <td>{{ store.count * store.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
+</div>
+{% endblock %}

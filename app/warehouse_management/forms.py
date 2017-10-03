@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import InputRequired, Length, Email, Regexp, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, FloatField
+from wtforms.validators import InputRequired, Length, Email, Regexp, EqualTo, ValidationError, NumberRange
 from ..models import Employee
 from datetime import date
 
@@ -50,8 +50,30 @@ class AddWarehouseForm(FlaskForm):
     submit = SubmitField('确认添加')
 
 
+class AddProviderForm(FlaskForm):
+    name = StringField('名称', validators=[InputRequired(), Length(1, 15)])
+    addr = StringField('地址', validators=[InputRequired(), Length(1, 30)])
+
+    submit = SubmitField('确认添加')
+
+
 class ModifyPasswordForm(FlaskForm):
     password = PasswordField('新密码', validators=[InputRequired(), EqualTo('password2', '密码不匹配')])
     password2 = PasswordField('确认密码', validators=[InputRequired()])
 
     submit = SubmitField('确认修改')
+
+
+class AddGoodForm(FlaskForm):
+    name = StringField('名称', validators=[InputRequired(), Length(1, 15)])
+    tid = IntegerField('类别编号', validators=[NumberRange(1)])
+    price = FloatField('单价', validators=[InputRequired(), NumberRange(0)])
+
+    submit = SubmitField('添加')
+
+
+class AddTypeForm(FlaskForm):
+    name = StringField('名称', validators=[InputRequired(), Length(1, 15)])
+    parent = IntegerField('父类别', validators=[NumberRange(1)])
+
+    submit = SubmitField('添加')

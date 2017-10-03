@@ -24,9 +24,9 @@ def employee_required(f):
     return permission_required(Employee)(f)
 
 
-@employee_required
 def su_required(f):
     @wraps(f)
+    @employee_required
     def decorated_function(*args, **kwargs):
         if not current_user.isSU:
             abort(403)

@@ -1,0 +1,72 @@
+{% extends "./base.html" %}
+
+{% block styles %}
+{{ super() }}
+<style type="text/css">
+.sidebar {
+    width: 130;
+}
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-top-color: #bdbdbd;
+}
+.panel-default>.panel-heading {
+    color: #D1D1D1;
+    background-color: #3a3a3a;
+    border-color: #858585;
+}
+.panel-body {
+    padding: 5px;
+    background-color: #E0E0E0;
+}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 col-sm-2">
+            <aside class="sidebar show perfectScrollbar">
+                <div id="solso-sidebar">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseZero">
+                                订单管理
+                            </button>
+                            <div id="collapseZero" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <a class="btn btn-block" href="{{ url_for('client.orders') }}">我的订单</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="{{ url_for('client.add_order') }}">提交订单</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseOne">
+                                账户管理
+                            </button>
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <a class="btn btn-block" href="{{ url_for('client.account') }}">账户信息</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="{{ url_for('client.modify_password') }}">修改密码</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="col-md-8 col-sm-10">
+            <div class="container-fluid left-border">
+                {% block true_content %}
+                <div align="center">
+                    <h2>欢迎使用服务系统, {{current_user.nickname}}</h2>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

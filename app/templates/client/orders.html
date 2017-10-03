@@ -1,0 +1,63 @@
+
+{% extends "client/index.html" %}
+
+{% import "macros.html" as macros %}
+
+{% block true_content %}
+<div class="row">
+    <h1 align="center">我的订单</h1>
+</div>
+
+{% if not orders %}
+<div class="row">
+    <div class="alert alert-info" style="margin:20px">没有找到订单！</div>
+</div>
+{% else %}
+<div class="panel-group">
+{% for order in orders %}
+<div style="margin-bottom: 10px;">
+    <table class="table table-bordered" style="background-color:#FDFDFD;">
+        <tbody>
+            <tr>
+                <td><b>订单编号: {{ order.oid }}</b></td>
+                <td><b>提交时间: {{ order.time }}</b></td>
+                <td><b>状态: {{ order.state }}</b></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="padding:0;">
+                    <div id="collapse{{loop.index}}" class="collapse">
+                        <table class="table table-striped table-bordered" style="margin-bottom: 0;">
+                            <thead>
+                                <tr>
+                                    <th>货物编号</th>
+                                    <th>货物名称</th>
+                                    <th>单价</th>
+                                    <th>数量</th>
+                                    <th>总价</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for detail in order.details %}
+                                <tr>
+                                    <td>{{ detail.gid }}</td>
+                                    <td>{{ detail.good_name }}</td>
+                                    <td>{{ detail.price }}</td>
+                                    <td>{{ detail.count }}</td>
+                                    <td>{{ detail.price*detail.count }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" style="background-color:#F5F5EC;" class="btn btn-block" data-toggle="collapse" href="#collapse{{loop.index}}">
+                        点击展开/折叠详情
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

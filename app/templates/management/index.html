@@ -44,6 +44,40 @@
                         </div>
 
                         <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseProvider">
+                                供应商管理
+                            </button>
+                            <div id="collapseProvider" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="{{ url_for('manage.providers') }}">供应商信息</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="{{ url_for('manage.add_provider') }}">添加供应商</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseGood">
+                                货物管理
+                            </button>
+                            <div id="collapseGood" class="panel-collapse collapse">
+                                <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="{{ url_for('manage.goods') }}">货物信息</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="{{ url_for('manage.add_good') }}">添加货物</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="{{ url_for('manage.types') }}">类别信息</a>
+                                </div>
+                                <div class="panel-body" align="center">
+                                    <a class="btn btn-block" href="{{ url_for('manage.add_provider') }}">添加类别</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
                             <button type="button" class="panel-heading btn btn-block" data-toggle="collapse" href="#collapseTwo">
                                 客户管理
                             </button>
@@ -108,9 +142,6 @@
                                 <div class="panel-body" align="center">
                                     <a class="btn btn-block" href="{{ url_for('manage.purchases') }}">查看采购单</a>
                                 </div>
-                                <!-- <div class="panel-body" align="center">
-                                    <a class="btn btn-block" href="#"></a>审核采购单</a>
-                                </div> -->
                             </div>
                         </div>
 
@@ -140,11 +171,8 @@
                                     <a class="btn btn-block" href="{{ url_for('manage.add_stock_in') }}">提交入库单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a class="btn btn-block" href="#">查看入库单</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.stock_ins') }}">查看入库单</a>
                                 </div>
-                                <!-- <div class="panel-body" align="center">
-                                    <a class="btn btn-block" href="#">审核入库单</a>
-                                </div> -->
                             </div>
                         </div>
 
@@ -154,14 +182,11 @@
                             </button>
                             <div id="collapseNine" class="panel-collapse collapse">
                                 <div class="panel-body" align="center">
-                                    <a class="btn btn-block" href="#">提交出库单</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.add_stock_out') }}">提交出库单</a>
                                 </div>
                                 <div class="panel-body" align="center">
-                                    <a class="btn btn-block" href="#">查看出库单</a>
+                                    <a class="btn btn-block" href="{{ url_for('manage.stock_outs') }}">查看出库单</a>
                                 </div>
-                                <!-- <div class="panel-body" align="center">
-                                    <a class="btn btn-block" href="#">审核出库单</a>
-                                </div> -->
                             </div>
                         </div>
 
@@ -190,15 +215,6 @@
                 </div>
                 {% endblock %}
             </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-3" data-spy="affix" data-offset-top="200" data-offset-left="100">
         </div>
     </div>
 </div>
